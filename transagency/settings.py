@@ -23,7 +23,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'fallback-key-for-dev')
 
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
+ALLOWED_HOSTS = ['*']
 
 # Настройки для статики
 STATIC_URL = '/static/'
