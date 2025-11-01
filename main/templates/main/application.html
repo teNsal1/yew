@@ -1,0 +1,220 @@
+{% extends 'main/base.html' %}
+{% load form_tags %}
+
+{% block content %}
+<div class="form-container">
+    <h1>Оставить заявку</h1>
+    
+    <!-- Ссылка на список заявок для суперпользователя -->
+    {% if user.is_superuser %}
+    <div class="text-center mt-3">
+        <a href="{% url 'application_list' %}" class="btn btn-outline-primary">
+            Просмотреть все заявки
+        </a>
+    </div>
+    {% endif %}
+    
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="{{ form.name.id_for_label }}">Имя</label>
+            {{ form.name }}
+            {% if form.name.errors %}
+                <div class="text-danger">{{ form.name.errors }}</div>
+            {% endif %}
+        </div>
+        
+        <div class="form-group">
+            <label for="{{ form.email.id_for_label }}">Email</label>
+            {{ form.email }}
+            {% if form.email.errors %}
+                <div class="text-danger">{{ form.email.errors }}</div>
+            {% endif %}
+        </div>
+        
+        <div class="form-group">
+            <label for="{{ form.phone.id_for_label }}">Номер телефона</label>
+            {{ form.phone }}
+            {% if form.phone.errors %}
+                <div class="text-danger">{{ form.phone.errors }}</div>
+            {% endif %}
+        </div>
+        
+        <div class="form-group">
+            <label for="{{ form.service.id_for_label }}">Выберите услугу</label>
+            {{ form.service }}
+            {% if form.service.errors %}
+                <div class="text-danger">{{ form.service.errors }}</div>
+            {% endif %}
+        </div>
+        
+        <button type="submit">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-line stroke-linejoin="round">
+                <path d="M22 2L11 13"></path>
+                <path d="M22 2l-7 20-4-9-9-4 20-7z"></path>
+            </svg>
+            Отправить заявку
+        </button>
+    </form>
+</div>
+
+<!-- JavaScript для автоматического заполнения полей -->
+<script>
+// Ждем полной загрузки DOM
+document.addEventListener('DOMContentLoaded', function() {
+    // Проверяем, авторизован ли пользователь
+    {% if user.is_authenticated %}
+    // Собираем данные пользователя из Django контекста
+    // Используем фильтр escapejs для безопасной передачи данных в JavaScript
+    const userData = {
+        name: "{{ user.first_name|escapejs }}",  // Используем first_name вместо username
+        email: "{{ user.email|escapejs }}",
+        phone: "{% if user.profile.phone %}{{ user.profile.phone|escapejs }}{% endif %}"
+    };
+    
+    // Функция для заполнения полей формы
+    function autoFillForm() {
+        // Заполняем поле имени, если данные доступны
+        if (userData.name && userData.name.trim() !== '') {
+            const nameField = document.querySelector('input[name="name"]');
+            if (nameField && !nameField.value) {  // Заполняем только если поле пустое
+                nameField.value = userData.name;
+                console.log('Поле имени автоматически заполнено');
+            }
+        }
+        
+        // Заполняем поле email, если данные доступны
+        if (userData.email && userData.email.trim() !== '') {
+            const emailField = document.querySelector('input[name="email"]');
+            if (emailField && !emailField.value) {  // Заполняем только если поле пустое
+                emailField.value = userData.email;
+                console.log('Поле email автоматически заполнено');
+            }
+        }
+        
+        // Заполняем поле телефона, если данные доступны
+        if (userData.phone && userData.phone.trim() !== '') {
+            const phoneField = document.querySelector('input[name="phone"]');
+            if (phoneField && !phoneField.value) {  // Заполняем только если поле пустое
+                phoneField.value = userData.phone;
+                console.log('Поле телефона автоматически заполнено');
+            }
+        }
+    }
+    
+    // Запускаем автозаполнение с небольшой задержкой для гарантии полной загрузки DOM
+    setTimeout(autoFillForm, 100);
+    {% else %}
+    console.log('Пользователь не авторизован, автозаполнение не доступно');
+    {% endif %}
+});
+</script>
+
+<style>
+    /* Стили формы */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+    
+    .form-container {
+        background: white;
+        padding: 40px;
+        border-radius: 16px;
+        box-shadow: 0 8px 30px rgba(11, 94, 215, 0.08);
+        width: 100%;
+        max-width: 500px;
+        margin: 40px auto;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .form-container:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 35px rgba(11, 94, 215, 0.12);
+    }
+    h1 {
+        text-align: center;
+        color: #0b5ed7;
+        margin-bottom: 30px;
+        font-size: 26px;
+        font-weight: 600;
+        letter-spacing: -0.5px;
+    }
+    .form-group {
+        margin-bottom: 24px;
+        position: relative;
+    }
+    label {
+        display: block;
+        margin-bottom: 8px;
+        color: #4a5568;
+        font-weight: 500;
+        font-size: 15px;
+    }
+    input, select {
+        width: 100%;
+        padding: 14px 16px;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        font-size: 16px;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    input:focus, select:focus {
+        border-color: #0b5ed7;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(11, 94, 215, 0.15);
+    }
+    select {
+        appearance: none;
+        background: white url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a5568' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") no-repeat right 16px center;
+        background-size: 18px;
+    }
+    select:focus {
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230b5ed7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    }
+    button {
+        width: 100%;
+        padding: 16px;
+        background: #0b5ed7;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: all 0.25s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+    button:hover {
+        background: #0a4eb8;
+        transform: translateY(-1px);
+    }
+    button svg {
+        width: 18px;
+        height: 18px;
+    }
+    .alert {
+        padding: 15px;
+        margin-bottom: 20px;
+        border: 1px solid transparent;
+        border-radius: 10px;
+        background-color: #d4edda;
+        color: #155724;
+        text-align: center;
+    }
+    .text-danger {
+        color: #dc3545;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+</style>
+{% endblock %}

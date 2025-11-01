@@ -1,0 +1,118 @@
+{% extends 'main/base.html' %}
+{% load form_tags %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card shadow">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">
+                        <i class="bi bi-plus-circle me-2"></i>Добавить новость
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        <!-- Поле заголовка -->
+                        <div class="mb-3">
+                            {{ form.title.label_tag }}
+                            {{ form.title|add_class:"form-control form-control-lg" }}
+                        </div>
+
+                        <!-- Поле краткого описания -->
+                        <div class="mb-3">
+                            {{ form.short_description.label_tag }}
+                            {{ form.short_description|add_class:"form-control" }}
+                        </div>
+
+                        <!-- Поле полного текста с редактором -->
+                        <div class="mb-3">
+                            {{ form.content.label_tag }}
+                            <textarea id="trumbowyg-editor" name="content" class="form-control" rows="10">{{ form.content.value|default:'' }}</textarea>
+                        </div>
+                        
+                        <!-- Поле для загрузки изображений -->
+                        <div class="mb-3">
+                            <label for="id_images" class="form-label">Изображения</label>
+                            <input type="file" name="images" id="id_images" class="form-control" multiple>
+                        </div>
+                        
+                        <!-- Кнопки -->
+                        <div class="d-flex justify-content-between">
+                            <a href="{% url 'home' %}" class="btn btn-outline-secondary">Отмена</a>
+                            <button type="submit" class="btn btn-success">Сохранить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Подключаем CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.27.3/ui/trumbowyg.min.css">
+
+<!-- Подключаем jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Подключаем Trumbowyg -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.27.3/trumbowyg.min.js"></script>
+<!-- Русский язык -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.27.3/langs/ru.min.js"></script>
+
+<style>
+/* Исправляем размер иконок Trumbowyg */
+.trumbowyg-box svg {
+    width: 14px !important;
+    height: 14px !important;
+}
+
+.trumbowyg-button-pane {
+    min-height: 36px !important;
+}
+
+.trumbowyg-button-pane .trumbowyg-button-group:not(:empty) + .trumbowyg-button-group:not(:empty) {
+    border-left: 1px solid #ddd;
+    padding-left: 5px;
+}
+
+/* Улучшаем внешний вид редактора */
+.trumbowyg-box {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 5px;
+}
+
+.trumbowyg-editor {
+    min-height: 200px;
+    padding: 15px;
+}
+
+/* Делаем кнопки более компактными */
+.trumbowyg-button-pane button {
+    padding: 5px 7px !important;
+    margin: 2px !important;
+}
+</style>
+
+<script>
+$(document).ready(function() {
+    // Простая инициализация редактора
+    $('#trumbowyg-editor').trumbowyg({
+        lang: 'ru',
+        btns: [
+            ['viewHTML'],
+            ['undo', 'redo'],
+            ['formatting'],
+            ['strong', 'em'],
+            ['superscript', 'subscript'],
+            ['link'],
+            ['unorderedList', 'orderedList'],
+            ['horizontalRule'],
+            ['removeformat']
+        ]
+    });
+});
+</script>
+{% endblock %}

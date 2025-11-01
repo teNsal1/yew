@@ -1,0 +1,52 @@
+<!-- main/templates/main/includes/footer.html -->
+<footer class="apple-footer">
+    <div class="container">
+        <div class="apple-nav">
+            <div class="apple-col">
+                <h3>Компания</h3>
+                <ul>
+                    <li><a href="{% url 'home' %}">О нас</a></li>
+                    <li><a href="#">Вакансии</a></li>
+                    <li><a href="{% url 'news_list' %}">Новости</a></li>
+                    <li><a href="#">Партнеры</a></li>
+                </ul>
+            </div>
+            <div class="apple-col">
+                <h3>Услуги</h3>
+                <ul>
+                    <li><a href="{% url 'calculate' %}">Рассчитать стоимость</a></li>
+                    <li><a href="{% url 'application' %}">Оставить заявку</a></li>
+                    <li><a href="#">Акции</a></li>
+                    <li><a href="#">Спецпредложения</a></li>
+                </ul>
+            </div>
+            <div class="apple-col">
+                <h3>Поддержка</h3>
+                <ul>
+                    <li><a href="#">Служба поддержки</a></li>
+                    <li><a href="#">Частые вопросы</a></li>
+                    <li><a href="#">Сообщить о проблеме</a></li>
+                    <li><a href="{% url 'requisites' %}">Связаться с нами</a></li>
+                </ul>
+            </div>
+            <div class="apple-col">
+                <h3>Контакты</h3>
+                <div class="apple-contact">
+                    <a href="tel:{{ requisites.phone }}"><i class="fas fa-phone"></i> {{ requisites.phone }}</a>
+                    <a href="mailto:{{ requisites.email }}"><i class="fas fa-envelope"></i> {{ requisites.email }}</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="apple-bottom">
+            <div class="apple-legal">
+                <a href="#">Политика конфиденциальности</a>
+                <a href="#">Условия использования</a>
+                <a href="#">Правовая информация</a>
+            </div>
+            <div class="apple-copyright">
+                {{ requisites.short_name }} © {% now "Y" %}. Все права защищены.
+            </div>
+        </div>
+    </div>
+</footer>

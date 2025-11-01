@@ -1,0 +1,67 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Новости компании</h1>
+        {% if user.is_superuser %}
+            <a href="{% url 'create_news' %}" class="btn btn-success">
+                <i class="bi bi-plus-lg"></i> Добавить новость
+            </a>
+        {% endif %}
+    </div>
+    
+    {% if page_obj %}
+        <div class="row g-4">
+            {% for news in page_obj %}
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                    {% if news.images.first %}
+                    <img src="{{ news.images.first.image.url }}" class="card-img-top" 
+                         alt="{{ news.title }}" style="height: 200px; object-fit: cover;">
+                    {% endif %}
+                    
+                    <div class="card-body d-flex flex-column">
+                        <h2 class="card-title h5">{{ news.title }}</h2>
+                        <div class="card-text mb-2">{{ news.short_description|striptags|truncatechars:120 }}</div>
+                        
+                        <div class="mt-auto">
+                            <p class="text-muted small mb-2">
+                                Опубликовано: {{ news.created_at|date:"d.m.Y H:i" }}
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="{% url 'news_detail' news.pk %}" class="btn btn-sm btn-outline-primary">
+                                    Читать далее
+                                </a>
+                                {% if user.is_superuser %}
+                                <div>
+                                    <a href="{% url 'edit_news' news.pk %}" class="btn btn-sm btn-outline-secondary">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <a href="{% url 'delete_news' news.pk %}" class="btn btn-sm btn-outline-danger"
+                                       onclick="return confirm('Удалить эту новость?')">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info text-center py-4">
+            <i class="bi bi-info-circle-fill me-2"></i>Новостей пока нет
+        </div>
+    {% endif %}
+
+    {% if page_obj.paginator.num_pages > 1 %}
+        <div class="mt-5">
+            {% include 'main/includes/pagination.html' %}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

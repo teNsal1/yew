@@ -1,0 +1,235 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <!-- Кнопка назад -->
+            <div class="mb-4">
+                <a href="{% url 'news_list' %}" class="btn btn-outline-primary">
+                    ← Назад к списку новостей
+                </a>
+            </div>
+
+            <article class="news-article bg-white p-4 rounded shadow-sm">
+                <header class="article-header">
+                    <h1 class="article-title">{{ news.title }}</h1>
+                    
+                    <div class="article-meta">
+                        <span class="category">Новость</span>
+                        <span class="author">Автор: {{ news.author.username }}</span>
+                        <span class="date">{{ news.created_at|date:"d.m.Y H:i" }}</span>
+                    </div>
+                    
+                    {% if news.images.all %}
+                        <div class="article-image mt-3">
+                            <img src="{{ news.images.first.image.url }}" 
+                                 alt="Изображение к новости '{{ news.title }}'" 
+                                 class="img-fluid rounded">
+                        </div>
+                    {% endif %}
+                </header>
+
+                <div class="article-content mt-4">
+                    <div class="content-wrapper">
+                        <div class="news-text-content">
+                            {{ news.content|safe }}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Галерея изображений -->
+                {% if news.images.all|length > 1 %}
+                <div class="article-gallery mt-4">
+                    <h3>Галерея изображений</h3>
+                    <div class="gallery-grid">
+                        {% for image in news.images.all %}
+                        <div class="gallery-item">
+                            <img src="{{ image.image.url }}" 
+                                 alt="Изображение {{ forloop.counter }}" 
+                                 class="img-thumbnail">
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                <footer class="article-footer mt-4 pt-3 border-top">
+                    <div class="article-actions">
+                        {% if user.is_authenticated and user == news.author %}
+                        <div class="admin-actions">
+                            <a href="{% url 'edit_news' news.id %}" class="btn btn-success btn-sm">
+                                ✏️ Редактировать
+                            </a>
+                            <a href="{% url 'delete_news' news.id %}" class="btn btn-danger btn-sm">
+                                🗑️ Удалить
+                            </a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </footer>
+            </article>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Обновленные стили для обычной страницы */
+.news-article {
+    font-family: 'Inter', sans-serif;
+}
+
+.article-title {
+    font-size: 2.2em;
+    /* font-weight: 700; */
+    color: #2d3436;
+    margin-bottom: 20px;
+}
+
+.article-meta {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    font-size: 0.95em;
+    color: #636e72;
+    flex-wrap: wrap;
+}
+
+.category {
+    background: #74b9ff;
+    color: white;
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+.article-image img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.news-text-content {
+    font-size: 1.1em;
+    line-height: 1.7;
+    color: #2d3436;
+    font-weight: 400;
+}
+
+.news-text-content p {
+    margin-bottom: 1.5rem;
+    text-align: justify;
+}
+
+.news-text-content strong {
+    font-weight: 600;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item img:hover {
+    transform: scale(1.05);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .article-title {
+        font-size: 1.8em;
+    }
+    
+    .article-meta {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .news-text-content {
+        font-size: 1em;
+    }
+}
+
+/* Сброс жирного текста для контента новости */
+.news-text-content,
+.news-text-content p,
+.news-text-content div,
+.news-text-content span {
+    font-weight: 400 !important;
+}
+
+.news-text-content strong,
+.news-text-content b {
+    font-weight: 600 !important;
+}
+
+/* ФОРСИРОВАННЫЙ СБРОС ЖИРНОСТИ ТЕКСТА */
+.news-text-content,
+.news-text-content *:not(strong):not(b) {
+    font-weight: 400 !important;
+}
+
+.news-text-content p,
+.news-text-content div:not([style*="font-weight"]),
+.news-text-content span:not([style*="font-weight"]) {
+    font-weight: 400 !important;
+}
+
+/* Убедимся, что все наследуемые стили сброшены */
+.article-content * {
+    font-weight: inherit !important;
+}
+
+.content-wrapper * {
+    font-weight: inherit !important;
+}
+
+/* Для сильно жирного текста */
+.news-text-content strong,
+.news-text-content b {
+    font-weight: 100 !important;
+}
+
+/* ПЕРЕОПРЕДЕЛЯЕМ BOOTSTRAP VARIABLES */
+.news-text-content {
+    --bs-body-font-weight: 100 !important;
+}
+
+.news-text-content,
+.news-text-content p,
+.news-text-content div,
+.news-text-content span {
+    font-weight: 100 !important;
+}
+
+.news-text-content * {
+    font-weight: 100 !important;
+}
+
+.news-text-content strong,
+.news-text-content b {
+    font-weight: 100 !important;
+}
+
+
+
+</style>
+
+
+
+{% endblock %}

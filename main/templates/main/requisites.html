@@ -1,0 +1,131 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="requisites-container">
+    <div class="requisites-wrapper">
+        <h1 class="requisites-title">Реквизиты компании</h1>
+        
+        {% if requisites %}
+        <div class="requisites-section">
+            <h2 class="section-title">Общая информация</h2>
+            <div class="requisites-grid">
+                <div class="requisites-item">
+                    <span class="requisites-label">Полное наименование:</span>
+                    <span class="requisites-value">{{ requisites.full_name }}</span>
+                </div>
+                <div class="requisites-item">
+                    <span class="requisites-label">Краткое наименование:</span>
+                    <span class="requisites-value">{{ requisites.short_name }}</span>
+                </div>
+                <div class="requisites-item">
+                    <span class="requisites-label">Ген. директор:</span>
+                    <span class="requisites-value">{{ requisites.director }}</span>
+                </div>
+                <div class="requisites-item">
+                    <span class="requisites-label">Контакты:</span>
+                    <span class="requisites-value">{{ requisites.phone }}, {{ requisites.email }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="requisites-section">
+            <h2 class="section-title">Юридические данные</h2>
+            <div class="requisites-grid">
+                <div class="requisites-item">
+                    <span class="requisites-label">ИНН:</span>
+                    <span class="requisites-value">{{ requisites.inn }}</span>
+                </div>
+                <div class="requisites-item">
+                    <span class="requisites-label">КПП:</span>
+                    <span class="requisites-value">{{ requisites.kpp }}</span>
+                </div>
+                <div class="requisites-item">
+                    <span class="requisites-label">ОГРН:</span>
+                    <span class="requisites-value">{{ requisites.ogrn }}</span>
+                </div>
+                <div class="requisites-item">
+                    <span class="requisites-label">ОКПО:</span>
+                    <span class="requisites-value">{{ requisites.okpo }}</span>
+                </div>
+                <div class="requisites-item">
+                    <span class="requisites-label">Код жд:</span>
+                    <span class="requisites-value">{{ requisites.railway_code }}</span>
+                </div>
+                <div class="requisites-item">
+                    <span class="requisites-label">Код ЕЛС:</span>
+                    <span class="requisites-value">{{ requisites.els_code }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="requisites-section">
+            <h2 class="section-title">Адреса</h2>
+            <div class="requisites-grid">
+                <div class="requisites-item">
+                    <span class="requisites-label">Юридический адрес:</span>
+                    <span class="requisites-value">{{ requisites.legal_address }}</span>
+                </div>
+                <div class="requisites-item">
+                    <span class="requisites-label">Почтовый адрес:</span>
+                    <span class="requisites-value">{{ requisites.postal_address }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="requisites-section">
+            <h2 class="section-title">Банковские реквизиты (руб)</h2>
+            <div class="requisites-grid">
+                <div class="requisites-item">
+                    <span class="requisites-label">Банк:</span>
+                    <span class="requisites-value">{{ requisites.bank_name_rub }}</span>
+                </div>
+                <div class="requisites-item">
+                    <span class="requisites-label">Р/с:</span>
+                    <span class="requisites-value">{{ requisites.account_rub }}</span>
+                </div>
+                <div class="requisites-item">
+                    <span class="requisites-label">Корр. счёт:</span>
+                    <span class="requisites-value">{{ requisites.corr_account_rub }}</span>
+                </div>
+                <div class="requisites-item">
+                    <span class="requisites-label">БИК:</span>
+                    <span class="requisites-value">{{ requisites.bik_rub }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="requisites-section">
+            <h2 class="section-title">Банковские реквизиты (вал)</h2>
+            <div class="requisites-grid">
+                <div class="requisites-item">
+                    <span class="requisites-label">Банк:</span>
+                    <span class="requisites-value">{{ requisites.bank_name_curr }}</span>
+                </div>
+                <div class="requisites-item">
+                    <span class="requisites-label">Валютный счёт:</span>
+                    <span class="requisites-value">{{ requisites.account_curr }}</span>
+                </div>
+                <div class="requisites-item">
+                    <span class="requisites-label">Корр. счёт:</span>
+                    <span class="requisites-value">{{ requisites.corr_account_curr }}</span>
+                </div>
+                <div class="requisites-item">
+                    <span class="requisites-label">БИК:</span>
+                    <span class="requisites-value">{{ requisites.bik_curr }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="download-container">
+            <a href="{% url 'download_requisites_pdf' %}" class="download-btn">
+                <i class="bi bi-file-earmark-pdf"></i> Скачать реквизиты в PDF
+            </a>
+        </div>
+        {% else %}
+        <div class="requisites-empty">
+            Реквизиты компании пока не добавлены
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

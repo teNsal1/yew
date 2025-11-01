@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Реквизиты компании {{ requisites.short_name }}</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; font-size: 12px; }
+        h1 { color: #0d6efd; text-align: center; margin-bottom: 20px; }
+        h2 { color: #084298; border-bottom: 1px solid #0d6efd; padding-bottom: 5px; margin-top: 15px; }
+        .section { margin-bottom: 15px; }
+        .row { display: flex; margin-bottom: 5px; }
+        .col-6 { width: 50%; float: left; }
+        dt { font-weight: bold; width: 40%; float: left; clear: left; }
+        dd { margin-left: 40%; }
+        .footer { margin-top: 30px; text-align: right; font-size: 0.9em; }
+        .clear { clear: both; }
+        .logo { text-align: center; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <!-- Здесь можно добавить логотип компании -->
+        <h1>Реквизиты компании {{ requisites.short_name }}</h1>
+    </div>
+    
+    <div class="section">
+        <h2>Общая информация</h2>
+        <dl>
+            <dt>Полное наименование:</dt>
+            <dd>{{ requisites.full_name }}</dd>
+            
+            <dt>Краткое наименование:</dt>
+            <dd>{{ requisites.short_name }}</dd>
+            
+            <dt>Генеральный директор:</dt>
+            <dd>{{ requisites.director }}</dd>
+            
+            <dt>Телефон:</dt>
+            <dd>{{ requisites.phone }}</dd>
+            
+            <dt>Email:</dt>
+            <dd>{{ requisites.email }}</dd>
+        </dl>
+    </div>
+    
+    <div class="section">
+        <h2>Юридические данные</h2>
+        <dl>
+            <dt>ИНН:</dt>
+            <dd>{{ requisites.inn }}</dd>
+            
+            <dt>КПП:</dt>
+            <dd>{{ requisites.kpp }}</dd>
+            
+            <dt>ОГРН:</dt>
+            <dd>{{ requisites.ogrn }}</dd>
+            
+            <dt>ОКПО:</dt>
+            <dd>{{ requisites.okpo }}</dd>
+            
+            <dt>Код жд:</dt>
+            <dd>{{ requisites.railway_code }}</dd>
+            
+            <dt>Код ЕЛС:</dt>
+            <dd>{{ requisites.els_code }}</dd>
+        </dl>
+    </div>
+    
+    <div class="section">
+        <h2>Адреса</h2>
+        <dl>
+            <dt>Юридический адрес:</dt>
+            <dd>{{ requisites.legal_address }}</dd>
+            
+            <dt>Почтовый адрес:</dt>
+            <dd>{{ requisites.postal_address }}</dd>
+        </dl>
+    </div>
+    
+    <div class="section">
+        <h2>Банковские реквизиты (руб)</h2>
+        <dl>
+            <dt>Банк:</dt>
+            <dd>{{ requisites.bank_name_rub }}</dd>
+            
+            <dt>Р/с:</dt>
+            <dd>{{ requisites.account_rub }}</dd>
+            
+            <dt>Корр. счёт:</dt>
+            <dd>{{ requisites.corr_account_rub }}</dd>
+            
+            <dt>БИК:</dt>
+            <dd>{{ requisites.bik_rub }}</dd>
+        </dl>
+    </div>
+    
+    <div class="section">
+        <h2>Банковские реквизиты (вал)</h2>
+        <dl>
+            <dt>Банк:</dt>
+            <dd>{{ requisites.bank_name_curr }}</dd>
+            
+            <dt>Валютный счёт:</dt>
+            <dd>{{ requisites.account_curr }}</dd>
+            
+            <dt>Корр. счёт:</dt>
+            <dd>{{ requisites.corr_account_curr }}</dd>
+            
+            <dt>БИК:</dt>
+            <dd>{{ requisites.bik_curr }}</dd>
+        </dl>
+    </div>
+    
+    <div class="footer">
+        <p>Дата формирования: {% now "d.m.Y H:i" %}</p>
+    </div>
+</body>
+</html>

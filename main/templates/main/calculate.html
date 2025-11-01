@@ -1,0 +1,94 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="under-construction-container">
+    <div class="under-construction-content">
+        <div class="construction-icon">
+            <div class="loader"></div>
+        </div>
+        <h1 class="construction-title">Страница в разработке</h1>
+        <p class="construction-text">Мы активно работаем над улучшением этого раздела.<br>Скоро здесь появится новый функционал!</p>
+        <p class="construction-contact">По вопросам обращайтесь на <a href="mailto:tra.info@mail.ru">tra.info@mail.ru</a></p>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.under-construction-container {
+    min-height: calc(100vh - 200px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background-color: #f9f9f9;
+}
+
+.under-construction-content {
+    text-align: center;
+    max-width: 600px;
+    padding: 40px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.1);
+}
+
+.construction-icon {
+    margin-bottom: 30px;
+}
+
+.loader {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1.5s linear infinite;
+}
+
+.construction-title {
+    font-size: 32px;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.construction-text {
+    font-size: 18px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.construction-contact {
+    font-size: 16px;
+    color: #888;
+}
+
+.construction-contact a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+    .construction-title {
+        font-size: 24px;
+    }
+    
+    .construction-text {
+        font-size: 16px;
+    }
+    
+    .under-construction-content {
+        padding: 25px;
+    }
+}
+</style>
+{% endblock %}

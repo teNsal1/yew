@@ -1,0 +1,145 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Редактирование заявки</h2>
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        {% if form.fields.status %}
+            {# Административная форма со статусом #}
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Административные данные</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="{{ form.status.id_for_label }}">Статус заявки</label>
+                                {{ form.status }}
+                                {% if form.status.errors %}
+                                    <div class="text-danger">{{ form.status.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% if form.fields.comments %}
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="{{ form.comments.id_for_label }}">Комментарий администратора</label>
+                                {{ form.comments }}
+                                {% if form.comments.errors %}
+                                    <div class="text-danger">{{ form.comments.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        {# Основные поля заявки #}
+        <div class="card mb-4">
+            <div class="card-header bg-light">
+                <h5 class="mb-0">Основная информация</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="{{ form.name.id_for_label }}">Название проекта</label>
+                            {{ form.name }}
+                            {% if form.name.errors %}
+                                <div class="text-danger">{{ form.name.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="{{ form.email.id_for_label }}">Email</label>
+                            {{ form.email }}
+                            {% if form.email.errors %}
+                                <div class="text-danger">{{ form.email.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="{{ form.phone.id_for_label }}">Телефон</label>
+                            {{ form.phone }}
+                            {% if form.phone.errors %}
+                                <div class="text-danger">{{ form.phone.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="{{ form.company_name.id_for_label }}">Название компании</label>
+                            {{ form.company_name }}
+                            {% if form.company_name.errors %}
+                                <div class="text-danger">{{ form.company_name.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.description.id_for_label }}">Описание проекта</label>
+                    {{ form.description }}
+                    {% if form.description.errors %}
+                        <div class="text-danger">{{ form.description.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.budget.id_for_label }}">Бюджет</label>
+                    {{ form.budget }}
+                    {% if form.budget.errors %}
+                        <div class="text-danger">{{ form.budget.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.deadline.id_for_label }}">Срок выполнения</label>
+                    {{ form.deadline }}
+                    {% if form.deadline.errors %}
+                        <div class="text-danger">{{ form.deadline.errors }}</div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+            <a href="{% url 'application_list' %}" class="btn btn-secondary">Отмена</a>
+        </div>
+    </form>
+</div>
+
+<style>
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+    
+    .form-control, .form-select {
+        border-radius: 0.375rem;
+        border: 1px solid #ced4da;
+        padding: 0.5rem 0.75rem;
+    }
+    
+    .form-control:focus, .form-select:focus {
+        border-color: #86b7fe;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+    
+    label {
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+    }
+</style>
+{% endblock %}

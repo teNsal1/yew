@@ -1,0 +1,116 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section text-white py-5" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('{% static 'img/truck-bg.jpg' %}') no-repeat center center/cover;">
+    <div class="container py-5">
+        <div class="row align-items-center">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-3 fw-bold mb-4">Транспортная компания</h1>
+                <p class="lead mb-4 fs-3" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.8);">
+                    Профессиональные грузоперевозки по России<br>
+                    автомобильным и железнодорожным транспортом
+                </p>
+                <a href="{% url 'application' %}" class="btn btn-primary btn-lg px-4 py-2 mt-3">Оставить заявку</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="about-section py-5" style="background: url('{% static 'img/about-bg.jpg' %}') no-repeat center center/cover; background-color: rgba(255, 255, 255, 0.9); background-blend-mode: lighten;">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6 mb-4 mb-md-0">
+                <img src="{% static 'img/about.jpg' %}" alt="О компании" class="img-fluid rounded shadow">
+            </div>
+            <div class="col-md-6">
+                <h2 class="mb-4">О компании</h2>
+                <p class="lead">Профессиональная команда и собственный автопарк обеспечивают комфортное сотрудничество с нами.</p>
+                <p>Наша основная деятельность — надежная транспортная логистика по всей территории Республики Татарстан и за ее пределами.</p>
+                <a href="{% url 'requisites' %}" class="btn btn-outline-primary mt-3">Наши реквизиты</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section class="services-section py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Наши услуги в Республике Татарстан</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="bi bi-truck text-primary fs-1 mb-3"></i>
+                        <h5 class="card-title">Доставка контейнеров</h5>
+                        <p class="card-text">Прием и доставка 20-ти и 40-ка футовых контейнеров на склады грузополучателей</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="bi bi-file-earmark-text text-primary fs-1 mb-3"></i>
+                        <h5 class="card-title">Оформление документов</h5>
+                        <p class="card-text">Раскредитовка перевозочных документов на станции и оформление экспортных документов</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="bi bi-box-seam text-primary fs-1 mb-3"></i>
+                        <h5 class="card-title">Хранение грузов</h5>
+                        <p class="card-text">Хранение груженых и порожних контейнеров на собственном терминале</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- News Section -->
+<section class="news-section py-5 bg-light">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Последние новости</h2>
+            <a href="{% url 'news_list' %}" class="btn btn-outline-primary">Все новости</a>
+        </div>
+        
+        <div class="row g-4">
+            {% for news in latest_news|slice:":3" %}
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    {% if news.images.first %}
+                        <img src="{{ news.images.first.image.url }}" class="card-img-top" alt="{{ news.title }}" style="height: 200px; object-fit: cover;">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ news.title }}</h5>
+                        <p class="card-text">{{ news.short_description|striptags|truncatewords:20 }}</p>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <small class="text-muted">{{ news.created_at|date:"d.m.Y H:i" }}</small>
+                        <a href="{% url 'news_detail' news.pk %}" class="btn btn-sm btn-outline-primary float-end">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <div class="alert alert-info">Новостей пока нет</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Contact CTA -->
+<section class="cta-section py-5 bg-dark text-white">
+    <div class="container text-center">
+        <h2 class="mb-4">Готовы к сотрудничеству?</h2>
+        <p class="lead mb-4">Оставьте заявку и наш менеджер свяжется с вами в течение 15 минут</p>
+        <a href="{% url 'application' %}" class="btn btn-primary btn-lg">Оставить заявку</a>
+    </div>
+</section>
+{% endblock %}

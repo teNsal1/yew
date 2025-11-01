@@ -1,0 +1,151 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="form-container">
+    <h1>Вход в систему</h1>
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        <!-- Поле логина -->
+        <div class="form-group">
+            <label for="id_username">Логин</label>
+            <input type="text" name="username" 
+                   id="id_username" 
+                   placeholder="Введите ваш логин"
+                   required>
+            {% if form.username.errors %}
+                <div class="text-danger">{{ form.username.errors }}</div>
+            {% endif %}
+        </div>
+        
+        <!-- Поле пароля -->
+        <div class="form-group">
+            <label for="id_password">Пароль</label>
+            <input type="password" name="password" 
+                   id="id_password" 
+                   placeholder="Введите пароль"
+                   required>
+            {% if form.password.errors %}
+                <div class="text-danger">{{ form.password.errors }}</div>
+            {% endif %}
+        </div>
+        
+        <!-- Кнопка входа -->
+        <button type="submit">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                <polyline points="10 17 15 12 10 7"></polyline>
+                <line x1="15" y1="12" x2="3" y2="12"></line>
+            </svg>
+            Войти
+        </button>
+    </form>
+    
+    <!-- Сообщения об ошибках -->
+    {% if form.errors %}
+    <div class="alert alert-danger" role="alert">
+        Неверный логин или пароль
+    </div>
+    {% endif %}
+    
+    <!-- Ссылка на регистрацию -->
+    <div style="text-align: center; margin-top: 20px;">
+        <p>Нет аккаунта? <a href="{% url 'register' %}" style="color: #0b5ed7; text-decoration: none;">Зарегистрироваться</a></p>
+    </div>
+</div>
+
+<style>
+    /* Стили из application.html */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+    
+    .form-container {
+        background: white;
+        padding: 40px;
+        border-radius: 16px;
+        box-shadow: 0 8px 30px rgba(11, 94, 215, 0.08);
+        width: 100%;
+        max-width: 500px;
+        margin: 40px auto;
+        transition: transform 0.3s, box-shadow 0.3s;
+        font-family: 'Inter', sans-serif;
+    }
+    .form-container:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 35px rgba(11, 94, 215, 0.12);
+    }
+    h1 {
+        text-align: center;
+        color: #0b5ed7;
+        margin-bottom: 30px;
+        font-size: 26px;
+        font-weight: 600;
+        letter-spacing: -0.5px;
+    }
+    .form-group {
+        margin-bottom: 24px;
+        position: relative;
+    }
+    label {
+        display: block;
+        margin-bottom: 8px;
+        color: #4a5568;
+        font-weight: 500;
+        font-size: 15px;
+    }
+    input {
+        width: 100%;
+        padding: 14px 16px;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        font-size: 16px;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        box-sizing: border-box;
+    }
+    input:focus {
+        border-color: #0b5ed7;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(11, 94, 215, 0.15);
+    }
+    button {
+        width: 100%;
+        padding: 16px;
+        background: #0b5ed7;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: all 0.25s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+    button:hover {
+        background: #0a4eb8;
+        transform: translateY(-1px);
+    }
+    button svg {
+        width: 18px;
+        height: 18px;
+    }
+    .alert {
+        padding: 15px;
+        margin-bottom: 20px;
+        border: 1px solid transparent;
+        border-radius: 10px;
+        background-color: #f8d7da;
+        color: #721c24;
+        text-align: center;
+        border-color: #f5c6cb;
+    }
+    .text-danger {
+        color: #dc3545;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+</style>
+{% endblock %}

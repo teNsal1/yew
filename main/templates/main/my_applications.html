@@ -1,0 +1,44 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Мои заявки</h2>
+    
+    {% if applications %}
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Услуга</th>
+                    <th>Дата создания</th>
+                    <th>Статус</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for app in applications %}
+                <tr>
+                    <td>{{ app.get_service_display }}</td>
+                    <td>{{ app.created_at|date:"d.m.Y H:i" }}</td>
+                    <td>
+                        <span class="badge bg-{{ app.get_status_color }}">
+                            {{ app.get_status_display }}
+                        </span>
+                    </td>
+                    <td>
+                        <a href="{% url 'update_my_application' app.pk %}" 
+                           class="btn btn-sm btn-primary">Редактировать</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="alert alert-info">
+        У вас пока нет заявок. <a href="{% url 'application' %}">Создать первую заявку</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
