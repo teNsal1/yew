@@ -55,10 +55,13 @@ SECRET_KEY = 'django-insecure-6ewnu&($lr$tn6%&w=ewg^-n^fiw**4$-(8cu#gpmvyi3&z5gu
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
 ALLOWED_HOSTS = [
-    "yew.onrender.com",   # временная ссылка Render
-    "трансагентство.com",    # твой настоящий домен
-    "www.трансагентство.com" # если используешь www
+    "yew.onrender.com",
+    "трансагентство.com",
+    "www.трансагентство.com",
+    "xn--80aagdk9bdjkmedib.com",
+    "www.xn--80aagdk9bdjkmedib.com",
 ]
 
 
