@@ -23,7 +23,6 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'fallback-key-for-dev')
 
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['*']
 
 # Настройки для статики
 STATIC_URL = '/static/'
@@ -153,7 +152,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -164,11 +162,8 @@ LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'  # Перенаправление после успешного входа
 LOGOUT_REDIRECT_URL = 'home'  # Перенаправление после выхода
 
-STATICFILES_DIRS = [BASE_DIR / "static"]
 
-# В settings.py добавьте:
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+
 
 # Принудительная обработка статических файлов
 if DEBUG:
