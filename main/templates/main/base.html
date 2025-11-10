@@ -21,7 +21,7 @@
     <!-- Пользовательские стили -->
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
-    <!-- Back‑to‑top кнопка -->
+    <!-- Back-to-top кнопка -->
     <style>
         .back-to-top-btn {
             position: fixed;
@@ -58,21 +58,17 @@
     <!-- Навигационная панель -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
         <div class="container">
-            <!-- Логотип и название сайта -->
             <a class="navbar-brand fw-bold" href="{% url 'home' %}">
                 <span class="text-primary">Трансагентство</span>
             </a>
 
-            <!-- Кнопка для мобильного меню -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                     aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <!-- Основное меню навигации -->
             <div class="collapse navbar-collapse" id="navbarNav">
-                <!-- Основные разделы сайта -->
                 <div class="navbar-nav">
                     <a class="nav-link px-3" href="{% url 'home' %}">Главная</a>
                     <a class="nav-link px-3" href="{% url 'calculate' %}">Рассчитать стоимость</a>
@@ -81,25 +77,20 @@
                     <a class="nav-link px-3" href="{% url 'application' %}">Оставить заявку</a>
                 </div>
 
-                <!-- Пользовательская часть меню -->
                 <div class="navbar-nav ms-auto">
                     {% if user.is_authenticated %}
-                        <!-- Ссылка на профиль пользователя (изменено с span на a) -->
-                        <a class="nav-link px-3" href="{% url 'profile' %}" style="text-decoration: none;">
+                        <a class="nav-link px-3" href="{% url 'profile' %}">
                             <i class="bi bi-person-circle me-1"></i>{{ user.username }}
                         </a>
                         
-                        <!-- Ссылка на мои заявки (только для обычных пользователей) -->
                         {% if not user.is_superuser %}
                             <a class="nav-link px-3" href="{% url 'my_applications' %}">
                                 <i class="bi bi-list-check me-1"></i>Мои заявки
                             </a>
                         {% endif %}
                         
-                        <!-- Форма выхода из системы -->
                         {% include 'main/includes/logout_form.html' %}
                         
-                        <!-- Дополнительные ссылки для администратора -->
                         {% if user.is_superuser %}
                             <a class="nav-link px-3" href="{% url 'create_news' %}">
                                 <i class="bi bi-plus-circle me-1"></i>Добавить новость
@@ -109,7 +100,6 @@
                             </a>
                         {% endif %}
                     {% else %}
-                        <!-- Ссылка для входа в систему -->
                         <a class="nav-link px-3" href="{% url 'login' %}">
                             <i class="bi bi-box-arrow-in-right me-1"></i>Войти
                         </a>
@@ -119,40 +109,31 @@
         </div>
     </nav>
 
-    <!-- Основное содержимое страницы -->
     <main>
         {% block content %}{% endblock %}
     </main>
 
-    <!-- Кнопка "Наверх" -->
     <button id="back-to-top" class="back-to-top-btn" aria-label="Наверх">
         <svg class="back-to-top-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
         </svg>
     </button>
 
-    <!-- Футер сайта -->
     {% include 'main/includes/footer.html' %}
 
-    <!-- Bootstrap JS Bundle -->
+    <!-- JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Lightbox JS -->
     <script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.3/dist/js/lightbox.min.js"></script>
-
-    <!-- Пользовательские скрипты -->
     <script src="{% static 'js/back-to-top.js' %}"></script>
     <script src="{% static 'js/applications.js' %}"></script>
 
-    <!-- Lightbox инициализация -->
     <script>
         lightbox.option({
-            'resizeDuration': 200,
-            'wrapAround': true
+            resizeDuration: 200,
+            wrapAround: true
         });
     </script>
 
-    <!-- Сообщения (уведомления) - перемещено перед закрывающим тегом body -->
     {% if messages %}
     <div class="messages-container">
         {% for message in messages %}
@@ -164,18 +145,17 @@
     </div>
 
     <script>
-    // Автоматическое скрытие сообщений через 5 секунд
-    document.addEventListener('DOMContentLoaded', function() {
-        const alerts = document.querySelectorAll('.alert');
-        alerts.forEach(function(alert) {
-            setTimeout(function() {
-                const bsAlert = new bootstrap.Alert(alert);
-                bsAlert.close();
-            }, 5000);
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.alert').forEach(function(alert) {
+                setTimeout(function() {
+                    const bsAlert = new bootstrap.Alert(alert);
+                    bsAlert.close();
+                }, 5000);
+            });
         });
-    });
     </script>
     {% endif %}
-{% block extra_js %}{% endblock %}
+
+    {% block extra_js %}{% endblock %}
 </body>
 </html>

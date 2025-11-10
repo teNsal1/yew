@@ -1,0 +1,1062 @@
+/* Убираем стандартные отступы */
+:root {
+    --primary-blue: #0b5ed7; /* было #0d6efd */
+    --dark-blue: #0a4eb5;   /* было #084298, сделал чуть светлее чем #084298 */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+}
+
+main {
+    flex: 1;
+    padding-bottom: 60px;
+    width: 100%;
+}
+
+/* Обновленные стили для навигации */
+.navbar {
+    padding: 0.5rem 0; /* Уменьшил вертикальные отступы */
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05); /* Более тонкая тень */
+    background-color: white;
+    position: relative;
+    z-index: 1000;
+    font-size: 0.95rem; /* Чуть уменьшил размер шрифта */
+}
+
+.navbar-brand {
+    font-size: 1.3rem; /* Уменьшил размер логотипа */
+    letter-spacing: -0.3px;
+    font-weight: 600;
+    color: var(--dark-blue) !important;
+    padding: 0.25rem 0;
+}
+
+.nav-link {
+    font-weight: 500;
+    color: #333 !important;
+    transition: all 0.2s ease;
+    margin: 0 0.4rem; /* Уменьшил боковые отступы */
+    padding: 0.4rem 0 !important; /* Уменьшил вертикальные отступы */
+    font-size: 0.95rem; /* Чуть уменьшил размер шрифта */
+    position: relative;
+}
+
+.nav-link:hover {
+    color: var(--primary-blue) !important;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--primary-blue);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after {
+    width: 60%;
+}
+
+.navbar-nav .active .nav-link::after {
+    width: 60%;
+}
+
+.navbar-toggler {
+    padding: 0.25rem 0.5rem; /* Уменьшил размер кнопки меню */
+}
+
+/* User info in navbar */
+.navbar-text {
+    color: #555;
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+}
+
+/* Кастомные стили для форм */
+.form-control-lg {
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+}
+
+.card {
+    border-radius: 1rem;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.card-header {
+    border-radius: 1rem 1rem 0 0 !important;
+}
+
+.card-img-top {
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    transition: transform 0.3s ease;
+}
+
+.card:hover .card-img-top {
+    transform: scale(1.03);
+}
+
+.btn-lg {
+    padding: 0.5rem 1.5rem;
+    font-size: 1.1rem;
+}
+
+/* Анимация кнопок */
+.btn {
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Иконки */
+.bi {
+    font-size: 1.2em;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination a, .pagination span {
+    padding: 8px 16px;
+    margin: 0 4px;
+    border: 1px solid #ddd;
+    text-decoration: none;
+    color: #333;
+}
+
+.pagination a:hover {
+    background-color: #f5f5f5;
+}
+
+.pagination .current {
+    background-color: #0b5ed7;
+    color: white;
+    border: 1px solid #0b5ed7;
+}
+
+/* Hero Section - обновленные стили */
+.hero-section {
+    position: relative;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+    padding: 5rem 0;
+    background-size: cover !important;
+    background-position: center !important;
+    margin-top: -1px; /* Убираем возможный зазор между navbar и hero */
+}
+
+.hero-text {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero-section h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-section .lead {
+    font-size: 1.75rem;
+    line-height: 1.4;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.hero-section .btn-lg {
+    font-size: 1.25rem;
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.hero-section .btn-primary {
+    background-color: var(--primary-blue);
+    border-color: var(--primary-blue);
+}
+
+.hero-section .btn-primary:hover {
+    background-color: var(--dark-blue);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* Services Cards */
+.services-section .card {
+    transition: transform 0.3s;
+    border-radius: 0.5rem;
+}
+
+.services-section .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* News Cards */
+.news-section .card {
+    border-radius: 0.5rem;
+    transition: all 0.3s;
+}
+
+.news-section .card:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Кнопка "Наверх" - объединенная версия */
+#back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--primary-blue);
+    color: white;
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+#back-to-top:hover {
+    background: var(--dark-blue);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px) scale(1.05);
+}
+
+#back-to-top.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#back-to-top .back-to-top-icon {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+    transition: transform 0.3s ease;
+}
+
+#back-to-top:hover .back-to-top-icon {
+    transform: translateY(-2px);
+}
+
+/* Стили для страницы реквизитов */
+.requisites-card {
+    border-radius: 0.75rem;
+    overflow: hidden;
+    border: none;
+}
+
+.requisites-card .card-header {
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #0b5ed7 0%, #0a4eb5 100%);
+    border-bottom: none;
+}
+
+.requisites-card dt {
+    font-weight: 500;
+    color: #555;
+    padding: 0.25rem 0;
+}
+
+.requisites-card dd {
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+    padding: 0.25rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.requisites-card h4 {
+    margin-bottom: 1.25rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+    color: var(--dark-blue);
+}
+
+.requisites-card h4::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: var(--primary-blue);
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .navbar {
+        padding: 0.3rem 0;
+    }
+    
+    .navbar-nav {
+        padding-top: 0.5rem;
+    }
+    
+    .nav-link {
+        padding: 0.3rem 0 !important;
+        margin: 0.1rem 0;
+    }
+
+    .navbar-nav {
+        padding-top: 1rem;
+    }
+    
+    .nav-link {
+        padding: 0.5rem 0;
+        margin: 0.2rem 0;
+    }
+    
+    .nav-link::after {
+        display: none;
+    }
+    
+    .navbar-nav .nav-link {
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .hero-section {
+        min-height: 400px;
+    }
+    .hero-section h1 {
+        font-size: 2.8rem;
+    }
+    .hero-section .lead {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1.3rem;
+    }
+
+    .hero-section {
+        min-height: 350px;
+    }
+    .hero-section h1 {
+        font-size: 2.2rem;
+    }
+    .hero-section .lead {
+        font-size: 1.2rem;
+    }
+    
+    .about-section img {
+        margin-bottom: 20px;
+    }
+    
+    .requisites-card dt, 
+    .requisites-card dd {
+        padding: 0.5rem 0;
+    }
+    
+    .requisites-card dt {
+        width: 100%;
+        float: none;
+    }
+    
+    .requisites-card dd {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+
+/* Footer Styles */
+.footer {
+    background-color: #f8f9fa;
+    color: #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-top: 1px solid #e0e0e0;
+    padding: 40px 0 0;
+}
+
+.footer-container {
+    padding: 20px 0;
+}
+
+.map-container {
+    height: 250px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.contact-info h3 {
+    color: #0b5ed7;
+    margin-top: 0;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.contact-details {
+    margin-top: 20px;
+}
+
+.contact-details p {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 1.05rem;
+}
+
+.contact-details i {
+    margin-right: 10px;
+    color: #0b5ed7;
+    width: 20px;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #0b5ed7;
+    color: white;
+    margin-top: 40px;
+}
+
+.footer-bottom p {
+    margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .map-container {
+        margin-bottom: 30px;
+    }
+    
+    .contact-details p {
+        font-size: 0.95rem;
+    }
+}
+
+.requisites-title {
+    font-weight: 400;
+    font-size: 1.8rem;
+    margin-bottom: 2.5rem;
+    text-align: center;
+    color: #333;
+}
+
+.requisites-section {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.section-title {
+    font-weight: 500;
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    color: #0b5ed7;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background: #0b5ed7;
+}
+
+.requisites-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.requisites-item {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.requisites-label {
+    font-weight: 500;
+    color: #666;
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
+}
+
+.requisites-value {
+    color: #333;
+    word-break: break-word;
+}
+
+.download-container {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    color: #0b5ed7;
+    text-decoration: none;
+    border: 1px solid #0b5ed7;
+    font-weight: 500;
+    transition: all 0.2s;
+    border-radius: 4px;
+}
+
+.download-btn:hover {
+    background: #0b5ed7;
+    color: white;
+}
+
+.download-btn .bi {
+    margin-right: 0.5rem;
+}
+
+.requisites-empty {
+    text-align: center;
+    color: #666;
+    padding: 2rem;
+    border: 1px dashed #ddd;
+    background: #f9f9f9;
+}
+
+@media (max-width: 768px) {
+    .requisites-wrapper {
+        padding: 1.5rem;
+    }
+    
+    .requisites-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .requisites-title {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+    }
+}
+
+/* Minimal Requisites Styles */
+.requisites-container {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 1rem;
+    background-color: #fafafa;
+    min-height: calc(100vh - 120px);
+    width: 100%;
+}
+
+.requisites-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    padding: 3rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+}
+
+/* Improved Footer Styles */
+.simple-footer {
+    background-color: #0b5ed7;
+    color: white;
+    position: relative;
+    z-index: 10;
+}
+
+.footer-top-spacer {
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.1), #0b5ed7);
+}
+
+.footer-content {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+.simple-footer p {
+    margin: 0.3rem 0;
+    line-height: 1.5;
+}
+
+.simple-footer i {
+    color: white;
+    font-size: 1rem;
+}
+
+/* Стили для логотипа как в предоставленном примере */
+.navbar-brand {
+    font-family: 'Arial', sans-serif !important;
+    font-size: 24px !important;
+    font-weight: bold !important;
+    color: #4a6bff !important; /* Тот самый синий цвет из примера */
+    text-transform: uppercase !important; /* Все буквы заглавные */
+    letter-spacing: 2px !important;
+}
+
+/* Новые стили для модального окна новостей */
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* Подключение шрифта Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Дополнительные стили для совместимости */
+.news-text-content {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.8;
+}
+
+.news-text-content p {
+    margin-bottom: 1.5rem;
+    text-align: justify;
+}
+
+.news-text-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin: 1rem 0;
+}
+
+/* Стили для сообщений */
+.messages-container {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 9999;
+    max-width: 400px;
+}
+
+.alert {
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    border: none;
+    margin-bottom: 10px;
+    animation: slideIn 0.3s ease-out;
+}
+
+.alert-success {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    color: white;
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+    color: white;
+}
+
+.alert-info {
+    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+    color: white;
+}
+
+.alert-warning {
+    background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+    color: white;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.btn-close {
+    filter: invert(1);
+    opacity: 0.8;
+}
+
+.btn-close:hover {
+    opacity: 1;
+}
+
+/* Стили для сообщений */
+.messages-container {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 9999;
+    max-width: 400px;
+}
+
+.alert {
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    border: none;
+    margin-bottom: 10px;
+    animation: slideIn 0.3s ease-out;
+}
+
+.alert-success {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    color: white;
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+    color: white;
+}
+
+.alert-info {
+    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+    color: white;
+}
+
+.alert-warning {
+    background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+    color: white;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.btn-close {
+    filter: invert(1);
+    opacity: 0.8;
+}
+
+.btn-close:hover {
+    opacity: 1;
+}
+
+/* Стили для профиля */
+.profile-info {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.info-group {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.info-group:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.info-group label {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 5px;
+}
+
+.info-value {
+    color: #212529;
+    font-size: 16px;
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 576px) {
+    .form-container {
+        margin: 20px;
+        padding: 30px 20px;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .btn-primary, .btn-secondary {
+        width: 100%;
+    }
+}
+
+/* Apple Style Footer */
+.apple-footer {
+    background: #f5f5f7;
+    color: #6e6e73;
+    padding: 40px 0;
+    font-size: 0.85rem;
+    margin-top: auto;
+}
+
+.apple-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.apple-nav {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    border-bottom: 1px solid #d2d2d7;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.apple-col h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #1d1d1f;
+}
+
+.apple-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.apple-col ul li {
+    margin-bottom: 10px;
+}
+
+.apple-col ul li a {
+    color: #6e6e73;
+    text-decoration: none;
+    transition: color 0.3s;
+    font-size: 0.85rem;
+}
+
+.apple-col ul li a:hover {
+    color: #0071e3;
+}
+
+.apple-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.apple-contact a {
+    color: #6e6e73;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+}
+
+.apple-contact a:hover {
+    color: #0071e3;
+}
+
+.apple-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.apple-legal {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.apple-legal a {
+    color: #6e6e73;
+    text-decoration: none;
+    font-size: 0.8rem;
+}
+
+.apple-legal a:hover {
+    text-decoration: underline;
+}
+
+.apple-copyright {
+    width: 100%;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #d2d2d7;
+    font-size: 0.8rem;
+    color: #6e6e73;
+}
+
+/* Responsive adjustments for Apple footer */
+@media (max-width: 768px) {
+    .apple-nav {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .apple-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .apple-legal {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .apple-nav {
+        grid-template-columns: 1fr;
+    }
+    
+    .apple-footer {
+        padding: 30px 0;
+    }
+    
+    .apple-container {
+        padding: 0 15px;
+    }
+}
+
+/* Добавьте в конец styles.css */
+.news-text-content {
+    font-weight: 400;
+    font-family: 'Inter', sans-serif;
+}
+
+.news-text-content * {
+    font-weight: inherit;
+}
+
+.news-text-content strong, 
+.news-text-content b {
+    font-weight: 600;
+}
+
+/* СБРОС СТИЛЕЙ ДЛЯ ТЕКСТА НОВОСТЕЙ */
+.news-text-content {
+    font-weight: 400 !important;
+    font-family: 'Inter', sans-serif !important;
+}
+
+.news-text-content *:not(strong):not(b):not(h1):not(h2):not(h3):not(h4):not(h5):not(h6) {
+    font-weight: 400 !important;
+}
+
+.news-text-content p,
+.news-text-content div,
+.news-text-content span,
+.news-text-content li {
+    font-weight: 400 !important;
+}
+
+.news-text-content strong,
+.news-text-content b {
+    font-weight: 600 !important;
+}
+
+/* Убедимся, что Bootstrap не переопределяет наши стили */
+.card-text {
+    font-weight: 400 !important;
+}
+
+/* Сброс наследования жирного шрифта */
+.article-content,
+.content-wrapper {
+    font-weight: 400 !important;
+}
+
+.article-content *,
+.content-wrapper * {
+    font-weight: inherit !important;
+}
+
+/* ЭКСТРЕННЫЙ СБРОС ДЛЯ НОВОСТЕЙ */
+.news-text-content,
+.news-text-content p,
+.news-text-content div,
+.news-text-content span,
+.news-text-content li {
+    font-weight: 100 !important;
+    font-family: 'Inter', sans-serif !important;
+}
+
+.news-text-content * {
+    font-weight: inherit !important;
+}
+
+.news-text-content strong,
+.news-text-content b {
+    font-weight: 100 !important;
+}
+
+/* ПЕРЕОПРЕДЕЛЕНИЕ BOOTSTRAP ДЛЯ НОВОСТЕЙ */
+.news-text-content,
+.news-text-content p,
+.news-text-content div,
+.news-text-content span {
+    font-weight: 400 !important;
+    --bs-body-font-weight: 400 !important;
+}
+
+.news-text-content * {
+    font-weight: 400 !important;
+    --bs-body-font-weight: 400 !important;
+}
+
+.news-text-content strong,
+.news-text-content b {
+    font-weight: 600 !important;
+}
+
